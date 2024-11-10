@@ -1,0 +1,12 @@
+services:
+  db:
+    build: ./internal/docker/mysql
+    container_name: snippetbox-db
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./internal/docker/mysql/scripts:/docker-entrypoint-initdb.d
+      - mysql:/var/lib/mysql
+
+volumes:
+  mysql:
