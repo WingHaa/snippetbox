@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"net/http"
 )
@@ -33,9 +34,13 @@ func (app *application) render(
 		return
 	}
 
-	w.WriteHeader(status)
+	buf := new(bytes.Buffer)
 
-	if err := ts.ExecuteTemplate(w, "base", data); err != nil {
+	if err := ts.ExecuteTemplate(buf, "base", data); err != nil {
 		app.serverError(w, r, err)
+		return
 	}
+
+	w.WriteHeader(status)
+	buf.WriteTo(w)
 }
