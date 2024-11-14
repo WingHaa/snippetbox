@@ -93,5 +93,7 @@ func (app *application) snipppetCreatePost(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
+	app.sessionManager.Put(r.Context(), "flash", "Snippet successfully created")
+
 	http.Redirect(w, r, fmt.Sprintf("/snippet/view/%d", id), http.StatusSeeOther)
 }
