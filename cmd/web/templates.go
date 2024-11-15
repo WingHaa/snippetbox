@@ -11,6 +11,7 @@ import (
 type templateData struct {
 	Form            any
 	Flash           string
+	CSRFToken       string
 	Snippet         models.Snippet
 	Snippets        []models.Snippet
 	CurrentYear     int
